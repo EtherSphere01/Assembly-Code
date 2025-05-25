@@ -6,28 +6,29 @@ MSG1 DB "HELLO WORLD$"
 MAIN PROC
         USER_INPUT:
         MOV AH, 01H
-        INT 21H
-        
+        INT 21H 
+        MOV BL, AL
+
         COMPARE1:
-        CMP AL, 61H
+        CMP BL, 61H
         JGE COMPARE2
         JMP EXIT
         
         COMPARE2:
-        CMP AL, 7AH
+        CMP BL, 7AH
         JLE DISPLAY 
         JMP EXIT
         
         DISPLAY:
-        SUB AL, 20H 
-        MOV AH, 02H 
+        MOV AH, 02H
         MOV DL, 0AH
-        INT 21H 
-        MOV AH, 02H 
-        MOV DL, 0DH
         INT 21H
         MOV AH, 02H
-        MOV DL, AL
+        MOV DL, 0DH
+        INT 21H
+        SUB BL, 20H
+        MOV AH, 02H
+        MOV DL, BL
         INT 21H
        
         
